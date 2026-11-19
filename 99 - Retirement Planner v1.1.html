@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprehensive Retirement & 3-Bucket Strategy Master Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #1e293b; }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { opacity: 1; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col p-3 md:p-5 gap-4 text-slate-200">
+
+  <!-- Header -->
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 gap-2">
+    <div class="flex items-center gap-2.5">
+      <div class="p-2 bg-sky-500/10 text-sky-400 rounded-lg border border-sky-500/20">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-base md:text-lg font-bold text-white tracking-wide">Retirement Accumulation & 3-Bucket Master Planner</h1>
+        <p class="text-xs text-slate-400">Complete lifecycle roadmap: Accumulation phase (SIP Step-up & Glidepath) + Post-Retirement 3-Bucket Cashflow (₹)</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="openHelpModal()" class="flex items-center gap-1.5 text-xs font-semibold text-sky-300 bg-sky-950/80 hover:bg-sky-900/90 border border-sky-700/70 px-3 py-2 rounded-lg transition-colors shadow-sm cursor-pointer">
+        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>3-Bucket Strategy & MF Guide</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main class="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1">
+
+    <!-- Left Panel: Inputs & Summary Cards (4 cols) -->
+    <section class="lg:col-span-4 flex flex-col gap-4">
+
+      <!-- Inputs Card -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+        <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-800 pb-2 mb-3">1. Your Inputs & Assumptions</h2>
+        
+        <div class="flex flex-col gap-3 text-xs">
+          <!-- Row 1: Rupee Related Fields -->
+          <div>
+            <div class="text-[10px] uppercase font-semibold text-sky-400 tracking-wider mb-1.5">Rupee Fields (₹)</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label for="monthlyExpDisplay" class="block text-slate-300 font-medium mb-1 text-[11px]">Monthly Exp</label>
+                <input type="text" id="monthlyExpDisplay" value="50,000" oninput="handleCurrencyInput(event, 'monthlyExp')" onblur="formatCurrencyInput('monthlyExpDisplay', 'monthlyExp')" class="w-full bg-slate-800 border border-slate-700 text-sky-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-sky-500">
+                <input type="hidden" id="monthlyExp" value="50000">
+              </div>
+              <div>
+                <label for="annualExpDisplay" class="block text-slate-300 font-medium mb-1 text-[11px]">Annual Exp</label>
+                <input type="text" id="annualExpDisplay" value="2,00,000" oninput="handleCurrencyInput(event, 'annualExp')" onblur="formatCurrencyInput('annualExpDisplay', 'annualExp')" class="w-full bg-slate-800 border border-slate-700 text-sky-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-sky-500">
+                <input type="hidden" id="annualExp" value="200000">
+              </div>
+              <div>
+                <label for="currentSavedDisplay" class="block text-slate-300 font-medium mb-1 text-[11px]">Saved So Far</label>
+                <input type="text" id="currentSavedDisplay" value="10,00,000" oninput="handleCurrencyInput(event, 'currentSaved')" onblur="formatCurrencyInput('currentSavedDisplay', 'currentSaved')" class="w-full bg-slate-800 border border-slate-700 text-emerald-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-emerald-500">
+                <input type="hidden" id="currentSaved" value="1000000">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: Years & Ages Related Fields -->
+          <div>
+            <div class="text-[10px] uppercase font-semibold text-amber-400 tracking-wider mb-1.5">Age & Horizon Fields</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label for="currentAge" class="block text-slate-300 font-medium mb-1 text-[11px]">Current Age</label>
+                <input type="number" id="currentAge" value="30" min="18" max="75" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-white font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label for="retireAge" class="block text-slate-300 font-medium mb-1 text-[11px]">Retire Age</label>
+                <input type="number" id="retireAge" value="60" min="25" max="85" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-white font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label for="lifeExpectancy" class="block text-slate-300 font-medium mb-1 text-[11px]">Life Expectancy</label>
+                <input type="number" id="lifeExpectancy" value="90" min="65" max="110" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-amber-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-amber-500">
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Percentage Related Fields -->
+          <div>
+            <div class="text-[10px] uppercase font-semibold text-emerald-400 tracking-wider mb-1.5">Percentage Assumptions</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label for="sipStepUp" class="block text-slate-300 font-medium mb-1 text-[11px]">SIP Step-up %</label>
+                <input type="number" id="sipStepUp" value="10" min="0" max="30" step="1" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-emerald-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-emerald-500">
+              </div>
+              <div>
+                <label for="inflationRate" class="block text-slate-300 font-medium mb-1 text-[11px]">Inflation %</label>
+                <input type="number" id="inflationRate" value="6" min="0" max="20" step="0.5" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-rose-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-rose-500">
+              </div>
+              <div>
+                <label for="rorRate" class="block text-slate-300 font-medium mb-1 text-[11px]">Post-Ret RoR %</label>
+                <input type="number" id="rorRate" value="10" min="1" max="25" step="0.5" oninput="calculateAll()" class="w-full bg-slate-800 border border-slate-700 text-emerald-400 font-mono font-bold rounded-lg px-2 py-2 text-xs focus:outline-none focus:border-emerald-500">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex justify-between items-center text-xs">
+          <span class="text-slate-400">Total Current Yearly Spend:</span>
+          <span id="totalCurrentSpend" class="font-mono font-bold text-slate-200">₹8,00,000</span>
+        </div>
+      </div>
+
+      <!-- Corpus & Required SIP Summary Card -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex-1 flex flex-col justify-between shadow-lg">
+        <div>
+          <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-800 pb-2 mb-3">2. Accumulation & Step-up SIP Summary</h2>
+          
+          <!-- Highlight Box -->
+          <div class="bg-gradient-to-br from-sky-950/80 to-slate-800/60 border border-sky-800/60 rounded-xl p-3.5 mb-3">
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-xs text-sky-300 font-medium">Target Corpus at Age <span id="lblRetireAge">60</span></span>
+              <span id="lblYearsToRetire" class="text-[10px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono">30 Yrs Away</span>
+            </div>
+            
+            <!-- Target Corpus Display & Editable Override Input Field -->
+            <div class="flex items-center justify-between gap-2 my-1">
+              <div id="requiredCorpus" class="text-2xl font-extrabold font-mono text-white tracking-tight">₹0</div>
+              <div class="flex flex-col items-end">
+                <label for="customTargetDisplay" class="text-[10px] text-slate-400 mb-0.5">Override Target (₹)</label>
+                <input type="text" id="customTargetDisplay" placeholder="Auto" oninput="handleCustomTargetInput(event)" onblur="formatCustomTargetBlur()" class="w-32 bg-slate-800 border border-sky-700/60 text-sky-300 font-mono text-xs font-bold rounded px-2 py-1 text-right focus:outline-none focus:border-sky-500" title="Leave blank to use auto-calculated required corpus, or enter custom target corpus">
+                <input type="hidden" id="customTargetCorpus" value="">
+              </div>
+            </div>
+
+            <div class="text-[11px] text-slate-400 mt-1.5 flex justify-between border-t border-sky-900/50 pt-1">
+              <span>Starting Monthly SIP (Year 1):</span>
+              <span id="requiredMonthlySIP" class="text-emerald-300 font-mono font-bold">₹0</span>
+            </div>
+          </div>
+
+          <!-- Glidepath & 3-Bucket Info -->
+          <div class="space-y-2 text-xs">
+            <div class="bg-slate-800/50 border border-slate-700/60 p-2.5 rounded-lg">
+              <div class="font-bold text-slate-200 flex items-center gap-1.5 mb-0.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Annual Step-up SIP Glidepath</span>
+              </div>
+              <p id="stepUpSummaryDesc" class="text-[10px] text-slate-400 leading-relaxed">Monthly SIP increases annually by the specified Step-up % to match inflation and growth targets effortlessly.</p>
+            </div>
+
+            <div class="bg-slate-800/50 border border-slate-700/60 p-2.5 rounded-lg">
+              <div class="flex justify-between items-center mb-0.5">
+                <div class="font-bold text-slate-200 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                  <span>Post-Retirement 3-Bucket Strategy</span>
+                </div>
+                <button onclick="openHelpModal()" class="text-[10px] text-sky-400 hover:text-sky-300 underline font-medium cursor-pointer">View MF Guide & Rates</button>
+              </div>
+              <p id="bucketSummaryRates" class="text-[10px] text-slate-400 leading-relaxed">At retirement age, corpus is split into <b>Bucket 1</b> (3 yrs liquid @ 6.0%), <b>Bucket 2</b> (7 yrs debt @ 8.5%), and <b>Bucket 3</b> (long-term equity @ 12.0%).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 pt-2 border-t border-slate-800 text-[10px] text-slate-500 text-center font-mono">
+          Model dynamically links Accumulation Step-up SIP → Retirement Milestone → 3-Bucket Cashflow
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Panel: Lifecycle Schedule Table (8 cols) -->
+    <section class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col min-h-[500px] shadow-lg">
+      
+      <!-- Corpus Depletion Alert Banner (Hidden by default) -->
+      <div id="depletionAlertBanner" class="hidden mb-3 bg-rose-950/80 border border-rose-600/80 text-rose-200 px-3.5 py-2.5 rounded-lg text-xs flex items-center justify-between shadow-md">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+          </svg>
+          <span id="depletionAlertText" class="font-medium"><b>Warning:</b> Corpus is exhausted earlier than life expectancy!</span>
+        </div>
+        <span class="text-[10px] bg-rose-900/80 px-2 py-1 rounded font-mono font-bold text-rose-300">Action Required</span>
+      </div>
+
+      <!-- Table Header Bar & Phase Tabs -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-3 mb-3 gap-2">
+        <div>
+          <h2 class="text-sm font-bold text-white">3. Complete Lifecycle Schedule</h2>
+          <p class="text-[11px] text-slate-400">Select tab to view Accumulation phase or Retirement 3-Bucket phase</p>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <!-- Tab Buttons (Accumulation / Retirement) -->
+          <div class="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700 text-xs">
+            <button onclick="setFilter('acc')" id="filterBtn-acc" class="px-3.5 py-1.5 rounded-md bg-sky-600 text-white font-semibold transition-colors cursor-pointer flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-sky-300"></span> Accumulation Phase
+            </button>
+            <button onclick="setFilter('post')" id="filterBtn-post" class="px-3.5 py-1.5 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span> Retirement Phase (3-Bucket)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- View Switcher (Table vs Chart) -->
+      <div class="flex justify-between items-center mb-2">
+        <div class="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700 text-xs">
+          <button onclick="setViewMode('table')" id="viewBtn-table" class="px-3 py-1 rounded-md bg-sky-600 text-white font-semibold transition-colors cursor-pointer">Table View</button>
+          <button onclick="setViewMode('chart')" id="viewBtn-chart" class="px-3 py-1 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer">Age vs Corpus Chart</button>
+        </div>
+        <div id="chartLegendInfo" class="text-[11px] text-slate-400 hidden">
+          <span class="inline-block w-2.5 h-2.5 bg-sky-400 rounded-full mr-1"></span> Accumulation &nbsp;
+          <span class="inline-block w-2.5 h-2.5 bg-amber-500 rounded-full mr-1"></span> Bucket 1 (Liquid) &nbsp;
+          <span class="inline-block w-2.5 h-2.5 bg-emerald-500 rounded-full mr-1"></span> Bucket 2 (Debt) &nbsp;
+          <span class="inline-block w-2.5 h-2.5 bg-sky-600 rounded-full mr-1"></span> Bucket 3 (Equity)
+        </div>
+      </div>
+
+      <!-- Table Wrapper -->
+      <div id="tableViewContainer" class="h-[500px] overflow-y-auto overflow-x-auto border border-slate-800 rounded-lg bg-slate-950/40 relative">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead id="tableHead" class="bg-slate-900 shadow-md sticky top-0 text-slate-300 font-semibold z-10 text-[11px] shadow-sm">
+            <!-- Dynamically populated based on active tab -->
+          </thead>
+          <tbody id="lifecycleTableBody" class="divide-y divide-slate-800/60 font-mono text-[11px]">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart Container -->
+      <div id="chartViewContainer" class="h-[500px] border border-slate-800 rounded-lg bg-slate-950/60 p-4 hidden flex flex-col items-center justify-center relative">
+        <div class="w-full h-full flex items-center justify-center">
+          <canvas id="corpusChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Legend / Footer -->
+      <div class="mt-3 pt-2.5 border-t border-slate-800 flex flex-wrap justify-between items-center text-[11px] text-slate-400 gap-2">
+        <div id="tableFooterNote" class="text-slate-400 font-medium">Viewing Accumulation Phase (Step-up SIP & Annual Portfolio Growth)</div>
+        <div id="endingBalanceNote" class="font-mono text-slate-300 font-medium">Final Balance at Life Expectancy: ₹0</div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Help Modal: 3-Bucket Strategy & Recommended MF Categories -->
+  <div id="helpModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4" onclick="closeHelpModalOnBackdrop(event)">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-5 md:p-6 shadow-2xl text-slate-200">
+      
+      <!-- Modal Header -->
+      <div class="flex justify-between items-start border-b border-slate-800 pb-3 mb-4">
+        <div>
+          <h3 class="text-base md:text-lg font-bold text-white">Post-Retirement 3-Bucket Strategy & MF Categories Guide</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Recommended mutual fund categories and return assumptions calibrated to your Expected RoR</p>
+        </div>
+        <button onclick="closeHelpModal()" class="text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 p-1.5 rounded-lg transition-colors cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Bucket Cards -->
+      <div class="space-y-3 text-xs">
+        
+        <!-- Bucket 1 -->
+        <div class="bg-slate-800/60 border border-amber-500/30 rounded-xl p-3.5">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-1.5">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <h4 class="font-bold text-amber-300 text-sm">Bucket 1: Immediate Cashflow & Liquidity (Years 1 to 3)</h4>
+            </div>
+            <span id="modalR1Badge" class="font-mono font-bold text-amber-300 bg-amber-950/80 border border-amber-700/50 px-2.5 py-0.5 rounded-md text-[11px]">Assumed Return: 6.0% p.a.</span>
+          </div>
+          <p class="text-slate-300 mb-2"><strong>Objective:</strong> Safeguard immediate living expenses so you never have to sell equities during a market downturn.</p>
+          <div class="text-slate-400">
+            <strong class="text-slate-200">Recommended Categories:</strong>
+            <ul class="list-disc list-inside mt-1 space-y-0.5">
+              <li><span class="text-slate-200 font-medium">Arbitrage Funds:</span> Tax-efficient alternative to Fixed Deposits with equity taxation.</li>
+              <li><span class="text-slate-200 font-medium">Liquid & Overnight Funds:</span> Ultra-safe, instant liquidity with negligible interest rate risk.</li>
+              <li><span class="text-slate-200 font-medium">Short-Term FDs / Sweep-in Accounts:</span> Guaranteed capital safety for monthly cashflow.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bucket 2 -->
+        <div class="bg-slate-800/60 border border-emerald-500/30 rounded-xl p-3.5">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-1.5">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+              <h4 class="font-bold text-emerald-300 text-sm">Bucket 2: Medium-Term Stability & Income (Years 4 to 10)</h4>
+            </div>
+            <span id="modalR2Badge" class="font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-700/50 px-2.5 py-0.5 rounded-md text-[11px]">Assumed Return: 8.5% p.a.</span>
+          </div>
+          <p class="text-slate-300 mb-2"><strong>Objective:</strong> Provide steady, inflation-resilient income for the medium term and systematically refill Bucket 1 every year.</p>
+          <div class="text-slate-400">
+            <strong class="text-slate-200">Recommended Categories:</strong>
+            <ul class="list-disc list-inside mt-1 space-y-0.5">
+              <li><span class="text-slate-200 font-medium">Conservative Hybrid Funds:</span> ~75–80% high-quality debt and ~15–25% equities for moderate growth.</li>
+              <li><span class="text-slate-200 font-medium">Corporate Bond & Banking/PSU Debt Funds:</span> High-credit-quality fixed income stability.</li>
+              <li><span class="text-slate-200 font-medium">Balanced Advantage Funds (BAFs):</span> Dynamically manages equity/debt allocation based on market valuations.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bucket 3 -->
+        <div class="bg-slate-800/60 border border-sky-500/30 rounded-xl p-3.5">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-1.5">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+              <h4 class="font-bold text-sky-300 text-sm">Bucket 3: Long-Term Growth & Inflation Beater (Years 11+)</h4>
+            </div>
+            <span id="modalR3Badge" class="font-mono font-bold text-sky-300 bg-sky-950/80 border border-sky-700/50 px-2.5 py-0.5 rounded-md text-[11px]">Assumed Return: 12.0% p.a.</span>
+          </div>
+          <p class="text-slate-300 mb-2"><strong>Objective:</strong> Primary wealth generator. Left untouched for 10+ years to absorb volatility and compound aggressively above inflation.</p>
+          <div class="text-slate-400">
+            <strong class="text-slate-200">Recommended Categories:</strong>
+            <ul class="list-disc list-inside mt-1 space-y-0.5">
+              <li><span class="text-slate-200 font-medium">Flexi Cap / Multi Cap Funds:</span> Diversified exposure across large, mid, and small-cap stocks.</li>
+              <li><span class="text-slate-200 font-medium">Nifty 50 Index / Large & Mid Cap Funds:</span> Core equity compounding with market leaders.</li>
+              <li><span class="text-slate-200 font-medium">Aggressive Hybrid Funds:</span> Permanent 65–80% equity allocation with built-in debt rebalancing.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Summary Table inside Modal -->
+      <div class="mt-4 max-h-[260px] overflow-y-auto overflow-x-auto border border-slate-800 rounded-lg">
+        <table class="w-full text-left border-collapse text-[11px]">
+          <thead class="bg-slate-800 sticky top-0 z-10 text-slate-300 shadow-sm">
+            <tr>
+              <th class="p-2 border-b border-slate-700">Bucket</th>
+              <th class="p-2 border-b border-slate-700">Horizon</th>
+              <th class="p-2 border-b border-slate-700">Recommended MF / Asset Class</th>
+              <th class="p-2 border-b border-slate-700 text-right">Assumed Return</th>
+              <th class="p-2 border-b border-slate-700">Role in Strategy</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800">
+            <tr>
+              <td class="p-2 font-bold text-amber-400">Bucket 1</td>
+              <td class="p-2 font-mono">Years 1–3</td>
+              <td class="p-2">Liquid, Overnight, Arbitrage, Short FD</td>
+              <td id="tblR1" class="p-2 text-right font-mono font-bold text-amber-300">6.0%</td>
+              <td class="p-2 text-slate-400">Immediate living expenses</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-emerald-400">Bucket 2</td>
+              <td class="p-2 font-mono">Years 4–10</td>
+              <td class="p-2">Conservative Hybrid, Banking & PSU Debt, BAF</td>
+              <td id="tblR2" class="p-2 text-right font-mono font-bold text-emerald-300">8.5%</td>
+              <td class="p-2 text-slate-400">Medium-term buffer & B1 refiller</td>
+            </tr>
+            <tr>
+              <td class="p-2 font-bold text-sky-400">Bucket 3</td>
+              <td class="p-2 font-mono">Years 11+</td>
+              <td class="p-2">Flexi Cap, Index Funds, Aggressive Hybrid</td>
+              <td id="tblR3" class="p-2 text-right font-mono font-bold text-sky-300">12.0%</td>
+              <td class="p-2 text-slate-400">Long-term wealth multiplier</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+        <span>* Return assumptions dynamically scale relative to your Post-Retire RoR input (<span id="modalBaseRor" class="text-emerald-400 font-mono font-bold">10.0%</span>).</span>
+        <button onclick="closeHelpModal()" class="bg-sky-600 hover:bg-sky-500 text-white font-semibold px-4 py-1.5 rounded-lg transition-colors cursor-pointer">Got It</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentFilter = 'acc';
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      const accBtn = document.getElementById('filterBtn-acc');
+      const postBtn = document.getElementById('filterBtn-post');
+
+      if (filter === 'acc') {
+        accBtn.className = "px-3.5 py-1.5 rounded-md bg-sky-600 text-white font-semibold transition-colors cursor-pointer flex items-center gap-1.5";
+        postBtn.className = "px-3.5 py-1.5 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5";
+      } else {
+        postBtn.className = "px-3.5 py-1.5 rounded-md bg-purple-600 text-white font-semibold transition-colors cursor-pointer flex items-center gap-1.5";
+        accBtn.className = "px-3.5 py-1.5 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1.5";
+      }
+      calculateAll();
+    }
+
+    function openHelpModal() {
+      const modal = document.getElementById('helpModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeHelpModal() {
+      const modal = document.getElementById('helpModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function closeHelpModalOnBackdrop(event) {
+      if (event.target.id === 'helpModal') {
+        closeHelpModal();
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeHelpModal();
+      }
+    });
+
+    // Indian Rupee Number Formatting Function (Lakhs / Crores with Indian comma grouping e.g. ₹1,23,45,678)
+    function formatINR(num) {
+      if (isNaN(num) || num <= 0.5) return "₹0";
+      if (num >= 1e7) {
+        return "₹" + (num / 1e7).toFixed(2) + " Cr";
+      }
+      let rounded = Math.round(num);
+      let str = rounded.toString();
+      let lastThree = str.substring(str.length - 3);
+      let otherNumbers = str.substring(0, str.length - 3);
+      if (otherNumbers != '') {
+        lastThree = ',' + lastThree;
+      }
+      let formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+      return "₹" + formatted;
+    }
+
+    function formatExactINR(num) {
+      if (isNaN(num) || num <= 0) return "₹0";
+      let rounded = Math.round(num);
+      let str = rounded.toString();
+      let lastThree = str.substring(str.length - 3);
+      let otherNumbers = str.substring(0, str.length - 3);
+      if (otherNumbers != '') {
+        lastThree = ',' + lastThree;
+      }
+      let formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+      return "₹" + formatted;
+    }
+
+    function formatInputNumber(num) {
+      if (isNaN(num) || num <= 0) return "";
+      let rounded = Math.round(num);
+      let str = rounded.toString();
+      let lastThree = str.substring(str.length - 3);
+      let otherNumbers = str.substring(0, str.length - 3);
+      if (otherNumbers != '') {
+        lastThree = ',' + lastThree;
+      }
+      return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    }
+
+    function handleCurrencyInput(event, hiddenId) {
+      let rawVal = event.target.value.replace(/[^0-9]/g, '');
+      let num = parseFloat(rawVal) || 0;
+      document.getElementById(hiddenId).value = num;
+      calculateAll();
+    }
+
+    function formatCurrencyInput(displayId, hiddenId) {
+      let val = parseFloat(document.getElementById(hiddenId).value) || 0;
+      document.getElementById(displayId).value = formatInputNumber(val);
+    }
+
+    function handleCustomTargetInput(event) {
+      let rawVal = event.target.value.replace(/[^0-9]/g, '');
+      let num = parseFloat(rawVal) || 0;
+      document.getElementById('customTargetCorpus').value = num > 0 ? num : '';
+      calculateAll();
+    }
+
+    function formatCustomTargetBlur() {
+      let val = parseFloat(document.getElementById('customTargetCorpus').value) || 0;
+      if (val > 0) {
+        document.getElementById('customTargetDisplay').value = formatInputNumber(val);
+      } else {
+        document.getElementById('customTargetDisplay').value = "";
+      }
+    }
+
+    function calculateAll() {
+      const monthlyExp = Math.max(0, parseFloat(document.getElementById('monthlyExp').value) || 0);
+      const annualExp = Math.max(0, parseFloat(document.getElementById('annualExp').value) || 0);
+      let currentAge = parseInt(document.getElementById('currentAge').value) || 30;
+      let retireAge = parseInt(document.getElementById('retireAge').value) || 60;
+      let maxAge = parseInt(document.getElementById('lifeExpectancy').value) || 90;
+      const currentSaved = Math.max(0, parseFloat(document.getElementById('currentSaved').value) || 0);
+      const stepUpRate = (parseFloat(document.getElementById('sipStepUp').value) || 0) / 100;
+      const inflation = (parseFloat(document.getElementById('inflationRate').value) || 0) / 100;
+      const ror = (parseFloat(document.getElementById('rorRate').value) || 0) / 100;
+
+      if (retireAge <= currentAge) retireAge = currentAge + 1;
+      if (maxAge <= retireAge) maxAge = retireAge + 1;
+
+      const yearsToRetire = retireAge - currentAge;
+      const retirementYears = maxAge - retireAge + 1;
+
+      const totalCurrentYearly = (monthlyExp * 12) + annualExp;
+      document.getElementById('totalCurrentSpend').textContent = formatExactINR(totalCurrentYearly);
+      document.getElementById('lblRetireAge').textContent = retireAge;
+      document.getElementById('lblYearsToRetire').textContent = `${yearsToRetire} Yr${yearsToRetire > 1 ? 's' : ''} Away`;
+
+      // Update step-up description in card
+      document.getElementById('stepUpSummaryDesc').textContent = `Monthly SIP increases annually by ${(stepUpRate * 100).toFixed(0)}% to match inflation and growth targets effortlessly.`;
+
+      // 1. Calculate required first year expense at retirement
+      const firstYearExp = totalCurrentYearly * Math.pow(1 + inflation, yearsToRetire);
+
+      // 2. Determine post-retirement bucket yields calibrated around RoR
+      const r1 = Math.max(0.02, ror - 0.04);   // Liquid / FD (~6.0% at 10% RoR)
+      const r2 = Math.max(0.03, ror - 0.015);  // Debt / Conservative (~8.5% at 10% RoR)
+      const r3 = Math.max(0.04, ror + 0.02);   // Equity (~12.0% at 10% RoR)
+
+      // Sync dynamic bucket rates in left panel & Help modal
+      const r1Str = (r1 * 100).toFixed(1) + "%";
+      const r2Str = (r2 * 100).toFixed(1) + "%";
+      const r3Str = (r3 * 100).toFixed(1) + "%";
+      document.getElementById('bucketSummaryRates').innerHTML = `At retirement age, corpus is split into <b>Bucket 1</b> (3 yrs liquid @ ${r1Str}), <b>Bucket 2</b> (7 yrs debt @ ${r2Str}), and <b>Bucket 3</b> (long-term equity @ ${r3Str}).`;
+      document.getElementById('modalR1Badge').textContent = `Assumed Return: ${r1Str} p.a.`;
+      document.getElementById('modalR2Badge').textContent = `Assumed Return: ${r2Str} p.a.`;
+      document.getElementById('modalR3Badge').textContent = `Assumed Return: ${r3Str} p.a.`;
+      document.getElementById('tblR1').textContent = r1Str;
+      document.getElementById('tblR2').textContent = r2Str;
+      document.getElementById('tblR3').textContent = r3Str;
+      document.getElementById('modalBaseRor').textContent = (ror * 100).toFixed(1) + "%";
+
+      // 3. Helper to simulate post-retirement 3-bucket cashflow given a starting retirement corpus
+      function simulatePostRetirement(initialCorpus) {
+        let targetB1 = 0;
+        for (let i = 0; i < Math.min(3, retirementYears); i++) {
+          targetB1 += firstYearExp * Math.pow(1 + inflation, i);
+        }
+        let targetB2 = 0;
+        for (let i = 3; i < Math.min(10, retirementYears); i++) {
+          targetB2 += (firstYearExp * Math.pow(1 + inflation, i)) / Math.pow(1 + r2, i);
+        }
+
+        let b1 = Math.min(initialCorpus, targetB1);
+        let remAfterB1 = Math.max(0, initialCorpus - b1);
+        let b2 = Math.min(remAfterB1, targetB2);
+        let b3 = Math.max(0, remAfterB1 - b2);
+
+        let finalBal = 0;
+        let depleted = false;
+        let depletionAge = null;
+
+        for (let yr = 0; yr < retirementYears; yr++) {
+          const expense = firstYearExp * Math.pow(1 + inflation, yr);
+          let needed = expense;
+          if (b1 >= needed) {
+            b1 -= needed;
+            needed = 0;
+          } else {
+            needed -= b1;
+            b1 = 0;
+            if (b2 >= needed) {
+              b2 -= needed;
+              needed = 0;
+            } else {
+              needed -= b2;
+              b2 = 0;
+              if (b3 >= needed) {
+                b3 -= needed;
+                needed = 0;
+              } else {
+                b3 = 0;
+                depleted = true;
+                if (!depletionAge) depletionAge = retireAge + yr;
+              }
+            }
+          }
+
+          b1 *= (1 + r1);
+          b2 *= (1 + r2);
+          b3 *= (1 + r3);
+
+          const remYears = retirementYears - 1 - yr;
+          if (remYears > 0) {
+            let desiredB1 = 0;
+            for (let k = 1; k <= Math.min(3, remYears); k++) {
+              desiredB1 += firstYearExp * Math.pow(1 + inflation, yr + k);
+            }
+            if (b1 < desiredB1 && b2 > 0) {
+              let t = Math.min(desiredB1 - b1, b2);
+              b1 += t; b2 -= t;
+            }
+            let desiredB2 = 0;
+            for (let k = 4; k <= Math.min(10, remYears); k++) {
+              desiredB2 += (firstYearExp * Math.pow(1 + inflation, yr + k)) / Math.pow(1 + r2, k);
+            }
+            if (b2 < desiredB2 && b3 > 0) {
+              let t = Math.min(desiredB2 - b2, b3);
+              b2 += t; b3 -= t;
+            }
+            if (b1 < desiredB1 && b3 > 0) {
+              let t = Math.min(desiredB1 - b1, b3);
+              b1 += t; b3 -= t;
+            }
+          }
+          if (yr === retirementYears - 1) {
+            finalBal = b1 + b2 + b3;
+          }
+        }
+        return { finalBal, depleted, depletionAge };
+      }
+
+      // Binary search for exact required corpus at retirement age
+      let low = 0;
+      let high = Math.max(firstYearExp * retirementYears * 12, 1e9);
+      for (let iter = 0; iter < 70; iter++) {
+        const mid = (low + high) / 2;
+        const res = simulatePostRetirement(mid);
+        if (res.depleted || res.finalBal < 100) {
+          low = mid;
+        } else {
+          high = mid;
+        }
+      }
+      const autoRequiredCorpus = Math.ceil(high / 1000) * 1000;
+
+      // Check if user has provided a custom override target corpus
+      const customTargetVal = parseFloat(document.getElementById('customTargetCorpus').value) || 0;
+      const targetCorpus = customTargetVal > 0 ? customTargetVal : autoRequiredCorpus;
+
+      document.getElementById('requiredCorpus').textContent = formatINR(targetCorpus);
+
+      // 4. Binary search for required Starting Monthly SIP (Year 1) given Annual Step-up % to reach targetCorpus
+      function simulateAccumulationStepUp(startSIP) {
+        let corpus = currentSaved;
+        let currentSIP = startSIP;
+        for (let yr = 0; yr < yearsToRetire; yr++) {
+          const yrsRemaining = yearsToRetire - yr;
+          let annualReturn = 0.12;
+          if (yrsRemaining <= 5) {
+            annualReturn = 0.09 + (yrsRemaining / 5) * 0.03;
+          }
+          const monthlyRate = annualReturn / 12;
+          for (let m = 0; m < 12; m++) {
+            corpus = (corpus + currentSIP) * (1 + monthlyRate);
+          }
+          currentSIP *= (1 + stepUpRate);
+        }
+        return corpus;
+      }
+
+      let sipLow = 0;
+      let sipHigh = targetCorpus;
+      for (let iter = 0; iter < 60; iter++) {
+        const midSIP = (sipLow + sipHigh) / 2;
+        const finalAccCorpus = simulateAccumulationStepUp(midSIP);
+        if (finalAccCorpus < targetCorpus) {
+          sipLow = midSIP;
+        } else {
+          sipHigh = midSIP;
+        }
+      }
+      const requiredStartingSIP = Math.max(0, Math.ceil(sipHigh / 100) * 100);
+      document.getElementById('requiredMonthlySIP').textContent = formatINR(requiredStartingSIP) + " /mo";
+
+      // 5. Generate Full Lifecycle Schedule Rows with Step-up SIP
+      const rows = [];
+      let accCorpus = currentSaved;
+      let currentYearlySIP = requiredStartingSIP;
+
+      // Accumulation Phase
+      for (let yr = 0; yr < yearsToRetire; yr++) {
+        const age = currentAge + yr;
+        const yrsRemaining = yearsToRetire - yr;
+        let annualReturn = 0.12;
+        let phaseLabel = `100% Equity Growth (${(stepUpRate*100).toFixed(0)}% Step-up)`;
+        if (yrsRemaining <= 5) {
+          annualReturn = 0.09 + (yrsRemaining / 5) * 0.03;
+          phaseLabel = `Glidepath De-risking (${(annualReturn*100).toFixed(1)}%, ${(stepUpRate*100).toFixed(0)}% Step-up)`;
+        }
+
+        const startCorpus = accCorpus;
+        const monthlyRate = annualReturn / 12;
+        const monthlyInstallment = currentYearlySIP;
+        let yearlyInvested = monthlyInstallment * 12;
+
+        for (let m = 0; m < 12; m++) {
+          accCorpus = (accCorpus + monthlyInstallment) * (1 + monthlyRate);
+        }
+        const interestEarned = accCorpus - startCorpus - yearlyInvested;
+
+        rows.push({
+          age,
+          type: 'acc',
+          sipOrExp: `+${formatINR(monthlyInstallment)}/mo`,
+          b1OrPort: formatINR(startCorpus),
+          b2OrSplit: formatINR(yearlyInvested),
+          b3OrEquities: formatINR(interestEarned),
+          movement: phaseLabel,
+          total: accCorpus
+        });
+
+        currentYearlySIP *= (1 + stepUpRate);
+      }
+
+      // Retirement Transition Year (Setting up the 3 Buckets based on accumulated corpus vs targetCorpus)
+      let targetB1 = 0;
+      for (let i = 0; i < Math.min(3, retirementYears); i++) {
+        targetB1 += firstYearExp * Math.pow(1 + inflation, i);
+      }
+      let targetB2 = 0;
+      for (let i = 3; i < Math.min(10, retirementYears); i++) {
+        targetB2 += (firstYearExp * Math.pow(1 + inflation, i)) / Math.pow(1 + r2, i);
+      }
+
+      let retirementCorpus = accCorpus;
+      let b1 = Math.min(retirementCorpus, targetB1);
+      let remAfterB1 = Math.max(0, retirementCorpus - b1);
+      let b2 = Math.min(remAfterB1, targetB2);
+      let b3 = Math.max(0, remAfterB1 - b2);
+
+      rows.push({
+        age: retireAge,
+        type: 'setup',
+        sipOrExp: 'RETIREMENT',
+        b1OrPort: `B1(Liquid): ${formatINR(b1)}`,
+        b2OrSplit: `B2(Debt): ${formatINR(b2)}`,
+        b3OrEquities: `B3(Equity): ${formatINR(b3)}`,
+        movement: `Step 1: Initial Setup | Step 2: B1=${formatINR(b1)}, B2=${formatINR(b2)} | Step 3: B3=${formatINR(b3)}`,
+        total: b1 + b2 + b3
+      });
+
+      // Post-Retirement Phase (3-Bucket Cashflow & Rebalancing in 3 Clear Steps)
+      let postRetirementDepleted = false;
+      let postRetirementDepletionAge = null;
+
+      for (let yr = 0; yr < retirementYears; yr++) {
+        const age = retireAge + yr;
+        const expense = firstYearExp * Math.pow(1 + inflation, yr);
+
+        let needed = expense;
+        let step1Text = "";
+
+        if (b1 >= needed) {
+          b1 -= needed;
+          step1Text = `1. Paid ${formatINR(needed)} from B1`;
+          needed = 0;
+        } else {
+          needed -= b1;
+          b1 = 0;
+          if (b2 >= needed) {
+            b2 -= needed;
+            step1Text = `1. Drained B1 + ${formatINR(needed)} from B2`;
+            needed = 0;
+          } else {
+            needed -= b2;
+            b2 = 0;
+            if (b3 >= needed) {
+              b3 -= needed;
+              step1Text = `1. Drained B1 & B2 + ${formatINR(needed)} from B3`;
+              needed = 0;
+            } else {
+              b3 = 0;
+              postRetirementDepleted = true;
+              if (!postRetirementDepletionAge) postRetirementDepletionAge = age;
+              step1Text = `1. CORPUS DEPLETED`;
+            }
+          }
+        }
+
+        b1 *= (1 + r1);
+        b2 *= (1 + r2);
+        b3 *= (1 + r3);
+
+        let step2Text = "2. B1/B2 Balanced";
+        let step3Text = "3. No Equity Transfer Needed";
+
+        const remYears = retirementYears - 1 - yr;
+        if (remYears > 0) {
+          let desiredB1 = 0;
+          for (let k = 1; k <= Math.min(3, remYears); k++) {
+            desiredB1 += firstYearExp * Math.pow(1 + inflation, yr + k);
+          }
+          if (b1 < desiredB1 && b2 > 0) {
+            let t21 = Math.min(desiredB1 - b1, b2);
+            b1 += t21; 
+            b2 -= t21;
+            step2Text = `2. Moved ${formatINR(t21)} B2 → B1`;
+          }
+
+          let desiredB2 = 0;
+          for (let k = 4; k <= Math.min(10, remYears); k++) {
+            desiredB2 += (firstYearExp * Math.pow(1 + inflation, yr + k)) / Math.pow(1 + r2, k);
+          }
+          if (b2 < desiredB2 && b3 > 0) {
+            let t32 = Math.min(desiredB2 - b2, b3);
+            b2 += t32; 
+            b3 -= t32;
+            step3Text = `3. Moved ${formatINR(t32)} B3 → B2`;
+          }
+
+          if (b1 < desiredB1 && b3 > 0) {
+            let t31 = Math.min(desiredB1 - b1, b3);
+            b1 += t31; 
+            b3 -= t31;
+            step3Text = `3. Moved ${formatINR(t31)} B3 → B1`;
+          }
+        }
+
+        const totalClosing = b1 + b2 + b3;
+        const threeStepMovement = `${step1Text} | ${step2Text} | ${step3Text}`;
+
+        rows.push({
+          age,
+          type: 'post',
+          sipOrExp: `-${formatINR(expense)}`,
+          b1OrPort: formatINR(b1),
+          b2OrSplit: formatINR(b2),
+          b3OrEquities: formatINR(b3),
+          movement: threeStepMovement,
+          total: totalClosing
+        });
+      }
+
+      // Check and display / hide Depletion Alert Banner
+      const alertBanner = document.getElementById('depletionAlertBanner');
+      const alertText = document.getElementById('depletionAlertText');
+      if (postRetirementDepleted && postRetirementDepletionAge) {
+        alertBanner.classList.remove('hidden');
+        alertBanner.classList.add('flex');
+        alertText.innerHTML = `<b>Warning:</b> Corpus is exhausted earlier than life expectancy at <b>Age ${postRetirementDepletionAge}</b>! Increase your monthly SIP, adjust retirement age, or reduce living expenses.`;
+      } else {
+        alertBanner.classList.remove('flex');
+        alertBanner.classList.add('hidden');
+      }
+
+      // Configure Header and Rows based on active Tab
+      const thead = document.getElementById('tableHead');
+      const footerNote = document.getElementById('tableFooterNote');
+      let filteredRows = [];
+
+      if (currentFilter === 'acc') {
+        thead.innerHTML = `
+          <tr>
+            <th class="p-2.5 border-b border-slate-700">Age</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-emerald-400">Monthly SIP</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-slate-300">Starting Portfolio</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-slate-400">Yearly Invested</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-emerald-300">Interest Earned</th>
+            <th class="p-2.5 border-b border-slate-700 text-left text-sky-400">Glidepath Strategy & Return</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-white">Ending Corpus</th>
+          </tr>
+        `;
+        footerNote.textContent = `Viewing Accumulation Phase (Ages ${currentAge} to ${retireAge - 1})`;
+        filteredRows = rows.filter(r => r.type === 'acc');
+      } else {
+        thead.innerHTML = `
+          <tr>
+            <th class="p-2.5 border-b border-slate-700">Age</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-rose-400">Annual Expense</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-amber-400">Bucket 1 (Liquid)</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-emerald-300">Bucket 2 (Debt)</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-sky-300">Bucket 3 (Equity)</th>
+            <th class="p-2.5 border-b border-slate-700 text-left text-purple-300">3-Step Action Log (Withdrawal, B2 Refill, B3 Rebalance)</th>
+            <th class="p-2.5 border-b border-slate-700 text-right text-white">Total Corpus</th>
+          </tr>
+        `;
+        footerNote.textContent = `Viewing Retirement Phase (Ages ${retireAge} to ${maxAge})`;
+        filteredRows = rows.filter(r => r.type === 'setup' || r.type === 'post');
+      }
+
+      // Populate Table
+      const tbody = document.getElementById('lifecycleTableBody');
+      tbody.innerHTML = filteredRows.map((r, idx) => {
+        const rowBg = idx % 2 === 0 ? 'bg-slate-900/40' : 'bg-slate-900/90';
+        if (r.type === 'acc') {
+          return `
+            <tr class="${rowBg} hover:bg-slate-800/60 transition-colors">
+              <td class="p-2.5">
+                <div class="font-bold text-slate-100 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                  Age ${r.age}
+                </div>
+              </td>
+              <td class="p-2.5 text-right text-emerald-400 font-bold">${r.sipOrExp}</td>
+              <td class="p-2.5 text-right text-slate-200">${r.b1OrPort}</td>
+              <td class="p-2.5 text-right text-slate-300 text-[10px]">${r.b2OrSplit}</td>
+              <td class="p-2.5 text-right text-emerald-300 text-[10px]">${r.b3OrEquities}</td>
+              <td class="p-2.5 text-left text-sky-300 text-[11px] font-sans font-medium">${r.movement}</td>
+              <td class="p-2.5 text-right text-white font-extrabold">${formatINR(r.total)}</td>
+            </tr>
+          `;
+        } else if (r.type === 'setup') {
+          return `
+            <tr class="bg-amber-950/60 border-y-2 border-amber-500/50 font-bold shadow-md">
+              <td class="p-3">
+                <div class="text-amber-300 flex items-center gap-1.5 font-extrabold text-sm">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+                  Age ${r.age}
+                </div>
+                <div class="text-[10px] text-amber-400 uppercase tracking-wider font-bold mt-0.5">Retirement Milestone</div>
+              </td>
+              <td class="p-3 text-right text-amber-400">INITIAL SETUP</td>
+              <td class="p-3 text-right text-amber-300">${r.b1OrPort}</td>
+              <td class="p-3 text-right text-emerald-300">${r.b2OrSplit}</td>
+              <td class="p-3 text-right text-sky-300">${r.b3OrEquities}</td>
+              <td class="p-3 text-left text-amber-200 text-[11px] font-sans font-semibold">${r.movement}</td>
+              <td class="p-3 text-right text-white font-extrabold text-sm">${formatINR(r.total)}</td>
+            </tr>
+          `;
+        } else {
+          return `
+            <tr class="${rowBg} hover:bg-slate-800/60 transition-colors">
+              <td class="p-2.5">
+                <div class="font-bold text-slate-100 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                  Age ${r.age}
+                </div>
+              </td>
+              <td class="p-2.5 text-right text-rose-400 font-bold">${r.sipOrExp}</td>
+              <td class="p-2.5 text-right text-amber-300 font-semibold">${r.b1OrPort}</td>
+              <td class="p-2.5 text-right text-emerald-300 font-semibold">${r.b2OrSplit}</td>
+              <td class="p-2.5 text-right text-sky-300 font-semibold">${r.b3OrEquities}</td>
+              <td class="p-2.5 text-left text-slate-300 text-[11px] font-sans">${r.movement}</td>
+              <td class="p-2.5 text-right text-white font-bold">${formatINR(r.total)}</td>
+            </tr>
+          `;
+        }
+      }).join('');
+
+      document.getElementById('endingBalanceNote').textContent = `Final Balance at Life Expectancy (Age ${maxAge}): ${formatINR(rows[rows.length - 1].total)}`;
+
+      // Build unified chart series directly from the exact same simulation as the table
+      const chartLabels = [];
+      const chartAcc = [];
+      const chartB1 = [];
+      const chartB2 = [];
+      const chartB3 = [];
+
+      // Accumulation years (ages currentAge .. retireAge - 1)
+      let simAcc = currentSaved;
+      let simSIP = requiredStartingSIP;
+      for (let yr = 0; yr < yearsToRetire; yr++) {
+        const age = currentAge + yr;
+        const yrsRemaining = yearsToRetire - yr;
+        let annualReturn = 0.12;
+        if (yrsRemaining <= 5) {
+          annualReturn = 0.09 + (yrsRemaining / 5) * 0.03;
+        }
+        const monthlyRate = annualReturn / 12;
+        for (let m = 0; m < 12; m++) {
+          simAcc = (simAcc + simSIP) * (1 + monthlyRate);
+        }
+        chartLabels.push('Age ' + age);
+        // Store exact value in Lakhs (rupees / 1,00,000)
+        chartAcc.push(Number((simAcc / 1e5).toFixed(2)));
+        chartB1.push(0);
+        chartB2.push(0);
+        chartB3.push(0);
+        simSIP *= (1 + stepUpRate);
+      }
+
+      // Retirement years (ages retireAge .. maxAge) using post-retirement bucket balances
+      let pb1 = Math.min(accCorpus, targetB1);
+      let premAfterB1 = Math.max(0, accCorpus - pb1);
+      let pb2 = Math.min(premAfterB1, targetB2);
+      let pb3 = Math.max(0, premAfterB1 - pb2);
+
+      for (let yr = 0; yr < retirementYears; yr++) {
+        const age = retireAge + yr;
+        const expense = firstYearExp * Math.pow(1 + inflation, yr);
+        let needed = expense;
+        if (pb1 >= needed) {
+          pb1 -= needed;
+        } else {
+          needed -= pb1; pb1 = 0;
+          if (pb2 >= needed) {
+            pb2 -= needed;
+          } else {
+            needed -= pb2; pb2 = 0;
+            if (pb3 >= needed) {
+              pb3 -= needed;
+            } else {
+              pb3 = 0;
+            }
+          }
+        }
+        pb1 *= (1 + r1);
+        pb2 *= (1 + r2);
+        pb3 *= (1 + r3);
+
+        const remYears = retirementYears - 1 - yr;
+        if (remYears > 0) {
+          let desiredB1 = 0;
+          for (let k = 1; k <= Math.min(3, remYears); k++) {
+            desiredB1 += firstYearExp * Math.pow(1 + inflation, yr + k);
+          }
+          if (pb1 < desiredB1 && pb2 > 0) {
+            let t = Math.min(desiredB1 - pb1, pb2);
+            pb1 += t; pb2 -= t;
+          }
+          let desiredB2 = 0;
+          for (let k = 4; k <= Math.min(10, remYears); k++) {
+            desiredB2 += (firstYearExp * Math.pow(1 + inflation, yr + k)) / Math.pow(1 + r2, k);
+          }
+          if (pb2 < desiredB2 && pb3 > 0) {
+            let t = Math.min(desiredB2 - pb2, pb3);
+            pb2 += t; pb3 -= t;
+          }
+          if (pb1 < desiredB1 && pb3 > 0) {
+            let t = Math.min(desiredB1 - pb1, pb3);
+            pb1 += t; pb3 -= t;
+          }
+        }
+
+        chartLabels.push('Age ' + age + (yr === 0 ? ' (Retire)' : ''));
+        chartAcc.push(0);
+        chartB1.push(Number((pb1 / 1e5).toFixed(2)));
+        chartB2.push(Number((pb2 / 1e5).toFixed(2)));
+        chartB3.push(Number((pb3 / 1e5).toFixed(2)));
+      }
+
+      window.latestChartData = {
+        labels: chartLabels,
+        acc: chartAcc,
+        b1: chartB1,
+        b2: chartB2,
+        b3: chartB3
+      };
+
+      if (currentViewMode === 'chart') {
+        renderCorpusChart();
+      }
+    }
+
+    function renderCorpusChart() {
+      const ctx = document.getElementById('corpusChart').getContext('2d');
+      const d = window.latestChartData;
+      if (!d) return;
+
+      if (myCorpusChart) {
+        myCorpusChart.destroy();
+      }
+
+      myCorpusChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: d.labels,
+          datasets: [
+            {
+              label: 'Accumulation Corpus',
+              data: d.acc,
+              backgroundColor: '#38bdf8',
+              stack: 'corpus',
+            },
+            {
+              label: 'Bucket 1 (Liquid / Cashflow)',
+              data: d.b1,
+              backgroundColor: '#f59e0b',
+              stack: 'corpus',
+            },
+            {
+              label: 'Bucket 2 (Debt / Income)',
+              data: d.b2,
+              backgroundColor: '#10b981',
+              stack: 'corpus',
+            },
+            {
+              label: 'Bucket 3 (Equity / Growth)',
+              data: d.b3,
+              backgroundColor: '#0284c7',
+              stack: 'corpus',
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              labels: { color: '#cbd5e1', font: { size: 11 } },
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const valLakhs = Number(context.raw || 0);
+                  const valCrores = (valLakhs / 100).toFixed(2);
+                  const formattedLakhs = valLakhs.toLocaleString('en-IN', { maximumFractionDigits: 2 });
+                  return context.dataset.label + ': ₹' + formattedLakhs + ' Lakhs (₹' + valCrores + ' Cr)';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 18 },
+              grid: { color: '#334155' }
+            },
+            y: {
+              stacked: true,
+              ticks: { 
+                color: '#94a3b8', 
+                font: { size: 10 },
+                callback: function(val) {
+                  if (Math.abs(val) >= 100) {
+                    return '₹' + (val / 100).toFixed(1) + ' Cr';
+                  }
+                  return '₹' + val + ' L';
+                }
+              },
+              grid: { color: '#334155' }
+            }
+          }
+        }
+      });
+    }
+
+    let currentViewMode = 'table';
+    let myCorpusChart = null;
+
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      const tableBtn = document.getElementById('viewBtn-table');
+      const chartBtn = document.getElementById('viewBtn-chart');
+      const tableCont = document.getElementById('tableViewContainer');
+      const chartCont = document.getElementById('chartViewContainer');
+      const legendInfo = document.getElementById('chartLegendInfo');
+
+      if (mode === 'table') {
+        tableBtn.className = "px-3 py-1 rounded-md bg-sky-600 text-white font-semibold transition-colors cursor-pointer";
+        chartBtn.className = "px-3 py-1 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer";
+        tableCont.classList.remove('hidden');
+        chartCont.classList.add('hidden');
+        legendInfo.classList.add('hidden');
+      } else {
+        chartBtn.className = "px-3 py-1 rounded-md bg-sky-600 text-white font-semibold transition-colors cursor-pointer";
+        tableBtn.className = "px-3 py-1 rounded-md text-slate-300 hover:text-white transition-colors cursor-pointer";
+        chartCont.classList.remove('hidden');
+        tableCont.classList.add('hidden');
+        legendInfo.classList.remove('hidden');
+        calculateAll();
+      }
+    }
+
+    window.onload = () => {
+      calculateAll();
+    };
+  </script>
+</body>
+</html>
